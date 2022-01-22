@@ -75,6 +75,18 @@ export default function App() {
       >
         <Text style={styles.time}> Confirm </Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => {
+          onChangeText(undefined);
+          onChangeNumber(undefined);
+          onChoseTime(false);
+          onSelectedTime(undefined);
+        }}
+        style={styles.resetButton}
+      >
+        <Text style={styles.time}> Reset </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -128,5 +140,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     backgroundColor: "#b2b2b2",
+  },
+
+  resetButton: {
+    marginTop: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: "red",
   },
 });
