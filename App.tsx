@@ -86,22 +86,25 @@ export default function App() {
           />
         </View>
       ) : (
-        <View>
+        <View style={{ alignItems: "center" }}>
           <Text style={styles.message}> and don't notify me between </Text>
-          <TextInput
-            style={styles.input}
-            value={startHour}
-            onChangeText={onChangeStartHour}
-            keyboardType="numeric"
-            placeholder="8"
-          />
-          <TextInput
-            style={styles.input}
-            value={endHour}
-            onChangeText={onChangeEndHour}
-            keyboardType="numeric"
-            placeholder="22"
-          />
+          <View style={{ flexDirection: "row" }}>
+            <TextInput
+              style={styles.input}
+              value={startHour}
+              onChangeText={onChangeStartHour}
+              keyboardType="numeric"
+              placeholder="8"
+            />
+            <Text style={styles.message}> - </Text>
+            <TextInput
+              style={styles.input}
+              value={endHour}
+              onChangeText={onChangeEndHour}
+              keyboardType="numeric"
+              placeholder="22"
+            />
+          </View>
         </View>
       )}
 
