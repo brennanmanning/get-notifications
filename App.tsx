@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  FlatList,
   StyleSheet,
   Text,
   TextInput,
@@ -9,14 +8,23 @@ import {
 } from "react-native";
 
 export default function App() {
+  enum TIMES {
+    min = "minutes",
+    hours = "hours",
+    days = "days",
+  }
+
   const [text, onChangeText] = React.useState<string | undefined>();
   const [number, onChangeNumber] = React.useState<string | undefined>();
   const [timeChosen, onChoseTime] = React.useState<boolean>(false);
-  const [time, onSelectedTime] = React.useState<string>();
+  const [time, onSelectedTime] = React.useState<TIMES>();
+  const [hour, onChangeHour] = React.useState<string | undefined>();
+  const [startHour, onChangeStartHour] = React.useState<string | undefined>();
+  const [endHour, onChangeEndHour] = React.useState<string | undefined>();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.message}>I want to reminded to</Text>
+      <Text style={styles.message}>I want to be reminded to</Text>
       <TextInput
         style={styles.input}
         value={text}
@@ -37,7 +45,7 @@ export default function App() {
           <TouchableOpacity
             onPress={() => {
               onChoseTime(true);
-              onSelectedTime("minutes");
+              onSelectedTime(TIMES.min);
             }}
             style={styles.timeButton}
           >
@@ -47,7 +55,7 @@ export default function App() {
           <TouchableOpacity
             onPress={() => {
               onChoseTime(true);
-              onSelectedTime("hours");
+              onSelectedTime(TIMES.hours);
             }}
             style={styles.timeButton}
           >
@@ -57,7 +65,7 @@ export default function App() {
           <TouchableOpacity
             onPress={() => {
               onChoseTime(true);
-              onSelectedTime("days");
+              onSelectedTime(TIMES.days);
             }}
             style={styles.timeButton}
           >
@@ -65,6 +73,38 @@ export default function App() {
           </TouchableOpacity>
         </View>
       )}
+
+      {time === TIMES.days ? (
+        <View style={{ alignItems: "center" }}>
+          <Text style={styles.message}> at </Text>
+          <TextInput
+            style={styles.input}
+            value={hour}
+            onChangeText={onChangeHour}
+            keyboardType="numeric"
+            placeholder="9"
+          />
+        </View>
+      ) : (
+        <View>
+          <Text style={styles.message}> and don't notify me between </Text>
+          <TextInput
+            style={styles.input}
+            value={startHour}
+            onChangeText={onChangeStartHour}
+            keyboardType="numeric"
+            placeholder="8"
+          />
+          <TextInput
+            style={styles.input}
+            value={endHour}
+            onChangeText={onChangeEndHour}
+            keyboardType="numeric"
+            placeholder="22"
+          />
+        </View>
+      )}
+
       <TouchableOpacity
         onPress={() =>
           alert(
