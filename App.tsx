@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function App() {
+function HomeScreen() {
   enum TIMES {
     min = "minutes",
     hours = "hours",
@@ -134,6 +136,18 @@ export default function App() {
   );
 }
 
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -192,3 +206,5 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
   },
 });
+
+export default App;
